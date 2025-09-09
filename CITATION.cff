@@ -3,6 +3,6 @@ message: "If you use this software, please cite it as below."
 authors:
 - given-names: "Allen Institute for Neural Dynamics"
 title: "aind_hierarchical_bootstrap"
-version: "v0.0.3"
+version: "v0.0.4"
 date-release: 2025-09-08
 url: "https://github.com/AllenNeuralDynamics/aind_hierarchical_bootstrap"
