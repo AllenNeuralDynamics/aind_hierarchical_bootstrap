@@ -4,8 +4,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import hierarchical_bootstrap.bootstrap as hb
-import hierarchical_bootstrap.make_dataset as md
+import aind_hierarchical_bootstrap.bootstrap as hb
+import aind_hierarchical_bootstrap.make_dataset as md
 
 '''
    Development functions for comparing implementations 

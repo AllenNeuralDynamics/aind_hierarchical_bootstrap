@@ -2,8 +2,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-import hierarchical_bootstrap.bootstrap as hb
-import hierarchical_bootstrap.stats as stats
+import aind_hierarchical_bootstrap.bootstrap as hb
+import aind_hierarchical_bootstrap.stats as stats
 
 '''
     Just functions for demonstrating how the method works 
