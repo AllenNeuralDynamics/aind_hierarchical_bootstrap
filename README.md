@@ -1,5 +1,5 @@
 
-# hierarchical_bootstrap
+# aind_hierarchical_bootstrap
 Implementation of a hierarchical bootstrap for pandas dataframes. This package can be used to perform two useful things:
  - Estimate the confidence interval that takes into account the hierarchical nature of the data
  - Perform a statistical test to compare the mean value between two groups that have hierachical structure. 
@@ -15,7 +15,7 @@ Contact: alexpiet [at] gmail [dot] com
 I recommend installing within a conda environment.
 
 > git clone https://github.com/AllenNeuralDynamics/aind_hierarchical_bootstrap.git  
-> cd hierarchical_bootstrap  
+> cd aind_hierarchical_bootstrap  
 > pip install .  
 
 ## Demonstration
@@ -24,7 +24,7 @@ I developed a simple demonstration of why a hierarchical approach is important w
 
 In this synthetic dataset there are two groups, colored black and mageneta. Each group has a hierarchical structure. As a specific example we might consider the groups two be an experimental manipulation, and the levels as nested observations (Level 1 could be behavioral sessions, level 2 could be cells, and level 3 is each measurement from a single cell). 
 
-> import hierarchical_bootstrap.make_data as md   
+> import aind_hierarchical_bootstrap.make_data as md   
 > df,bootstraps, stats_df = md.demonstrate_levels() 
 
 
@@ -40,7 +40,7 @@ Organize your data in the pandas "tidy" format, where each row is a single obser
 ### Estimating the standard error of the mean with nested data
 For example if we have a dataframe of observations "response" and nested hierarchies "level_1" and "level_2", then we can compute the bootstraps with different levels of hierachical bootstrapping. You can use the `df` variable from the demonstration script above to follow along these examples. To compute non-hierarchical bootstraps, which is just sampling with replacement from all observations, regardless of hierarchy (sample once):
 
-> import hierarchical_bootstrap.bootstrap as hb   
+> import aind_hierarchical_bootstrap.bootstrap as hb   
 > bootstraps = hb.bootstrap(df, metric='response',levels=[], nboots=10000)
 
 `bootstraps` is a dictionary with:
@@ -50,12 +50,12 @@ For example if we have a dataframe of observations "response" and nested hierarc
 
 To sample with one level of hierarchy, which means we sample with replacement from elements of "level_1", then sample with replacement from all observations within that element of level_1 but ignoring all structure below that (level_2, level_3). Note we are sampling twice here. Note now that the estimated SEM differs significantly from the naive approach above. 
 
-> import hierarchical_bootstrap.bootstrap as hb   
+> import aind_hierarchical_bootstrap.bootstrap as hb   
 > bootstraps = hb.bootstrap(df, metric='response',levels=['level_1'], nboots=10000)
 
 To sample with two levels of the hierarchy, which means we sample with replacement from elements of "level_1", then sample with replacement from "level_2" elements within that element of level_1, then finally sample from all observations within that level_1, level_2 element. Note we sample three times.
 
-> import hierarchical_bootstrap.bootstrap as hb   
+> import aind_hierarchical_bootstrap.bootstrap as hb   
 > bootstraps = hb.bootstrap(df, metric='response',levels=['level_1','level_2'], nboots=10000)
 
 How many nesting steps you should take depends on the variance at each level of your dataset. The code should work for as many levels as you want, but performance will suffer greatly from each additional level. 
@@ -72,7 +72,7 @@ Now `bootstraps` is a dictionary with two entries for each unique group:
 
 You can perform statistical testing with:
 
-> import hierarchical_bootstrap.stats as stats   
+> import aind_hierarchical_bootstrap.stats as stats   
 > stats_df = stats.compute_stats(bootstraps)
 
 `stats_df` is a dataframe with one row for each hypothesis test performed. Each row has the following columns:
